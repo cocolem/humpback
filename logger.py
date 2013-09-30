@@ -12,8 +12,7 @@ LoggerSetting = {
 		'TempDirectory' : '/tmp/mylog',
 		'TempPrefix' : 'track',	
 		'TempSuffix' : '.log'
-	},
-	'TimeFormat' : '%Y-%b-%d %H:%M:%S',
+	}
 }
 
 ### Class Define ###
@@ -43,6 +42,7 @@ class Logger(object):
 
 	LogFormat = '[%(levelname)s][%(asctime)s] %(message)s'
 #	LogFormat = '[%(levelname)s][%(asctime)s]['+ stack()[3][3] +'] %(message)s'
+	TimeFormat='%Y-%b-%d %H:%M:%S'
 
 	def __init__(self, setting = LoggerSetting):
 		self.setting = setting
@@ -50,9 +50,7 @@ class Logger(object):
 		self.logger = self._LoggerSetup()
 
 	def _LoggerFormat(self):
-		timeformat = self.setting['TimeFormat']
-		logformat = self.LogFormat
-		return logging.Formatter(logformat, timeformat)	
+		return logging.Formatter(Logger.LogFormat, Logger.TimeFormat)	
 
 	def _SreamHandlerSetup(self):
 		streamhandler = logging.StreamHandler(stdout)
